@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://2g01kr8vxasy"]
+
+[ext_resource type="Script" path="res://scripts/monster.gd" id="1_4oxs0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_um458"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gn0y"]
+albedo_color = Color(0.209645, 0.235302, 0.247951, 1)
+
+[node name="Monster" type="CharacterBody3D"]
+script = ExtResource("1_4oxs0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_um458")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+material = SubResource("StandardMaterial3D_7gn0y")
