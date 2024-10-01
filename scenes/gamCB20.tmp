@@ -1,0 +1,108 @@
+[gd_scene load_steps=12 format=3 uid="uid://cfgdo66ggpt1"]
+
+[ext_resource type="PackedScene" uid="uid://b0xx7mymhhx70" path="res://scenes/player.tscn" id="1_o3jtj"]
+[ext_resource type="MeshLibrary" uid="uid://chw8221td0k1c" path="res://tileset.tres" id="2_huqig"]
+[ext_resource type="Script" path="res://scripts/InvisibleDoor.gd" id="3_y4y2w"]
+[ext_resource type="PackedScene" uid="uid://m7vkqgk44c5a" path="res://scenes/cupboard.tscn" id="4_kyna3"]
+[ext_resource type="PackedScene" uid="uid://u0ifc5j5x3g1" path="res://scenes/key.tscn" id="4_ysvp7"]
+[ext_resource type="PackedScene" uid="uid://2g01kr8vxasy" path="res://scenes/monster.tscn" id="6_f1s55"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nnoa6"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ngbc1"]
+sky_material = SubResource("ProceduralSkyMaterial_nnoa6")
+
+[sub_resource type="Environment" id="Environment_kx7j2"]
+background_mode = 2
+sky = SubResource("Sky_ngbc1")
+ambient_light_color = Color(1, 0.94902, 0.8, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.02
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(1, 0.94902, 0.8, 1)
+fog_light_energy = 0.02
+fog_density = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3p4pa"]
+size = Vector3(3, 4, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x5yta"]
+size = Vector3(0.001, 3.50488, 3)
+
+[node name="Game" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kx7j2")
+
+[node name="Player" parent="." instance=ExtResource("1_o3jtj")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Player"]
+transform = Transform3D(1, 1.70314e-09, -3.3193e-11, -1.70314e-09, 0.999241, -0.0389633, -3.3193e-11, 0.0389633, 0.999241, 2.11545e-08, 0.719672, 0.483958)
+light_color = Color(1, 0.94902, 0.8, 1)
+spot_range = 12.4752
+spot_angle = 71.2215
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="GridMap" type="GridMap" parent="Environment"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh_library = ExtResource("2_huqig")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+bake_navigation = true
+data = {
+"cells": PackedInt32Array(65535, 0, 2, 0, 65535, 2, 65535, 65535, 2, 1, 65534, 1, 1, 1, 1441793, 65535, 2, 655361, 65534, 1, 655361, 65533, 0, 655361, 65534, 65534, 1048577, 65535, 65533, 1048577, 0, 65533, 1, 0, 0, 2, 0, 2, 1441793, 0, 1, 1441795, 65535, 1, 655363, 65534, 0, 655363, 65534, 65535, 1048579, 65535, 65534, 1048579, 0, 65534, 3, 1, 65535, 3, 1, 0, 1441795, 2, 65535, 0, 3, 65535, 0, 4, 65535, 0, 5, 65535, 0, 6, 65535, 0, 7, 65535, 0, 2, 0, 655360, 3, 0, 655360, 4, 0, 655360, 5, 0, 655360, 6, 0, 655360, 7, 0, 655360, 8, 1, 655361, 11, 1, 1441793, 11, 65534, 1, 8, 65534, 1048577, 9, 65534, 1048579, 10, 65534, 3, 11, 65535, 3, 11, 0, 1441795, 10, 1, 1441795, 9, 1, 655363, 8, 0, 655363, 8, 65535, 1048579, 9, 65535, 1048578, 9, 0, 1048578, 10, 0, 1048578, 10, 65535, 1048578, 12, 65535, 0, 13, 65535, 0, 14, 65535, 0, 12, 0, 655360, 13, 0, 655360, 14, 0, 655360, 15, 0, 655360, 16, 65534, 1048577, 17, 65534, 1, 17, 0, 1441793, 16, 0, 655360, 17, 65535, 1441792, 10, 2, 1441792, 10, 3, 1441792, 10, 4, 1441792, 10, 5, 1441792, 10, 6, 1441792, 10, 7, 1441792, 10, 8, 1441792, 10, 9, 1441792, 10, 10, 1441792, 10, 11, 1441792, 9, 11, 1048576, 9, 10, 1048576, 9, 9, 1048576, 9, 8, 1048576, 9, 7, 1048576, 9, 6, 1048576, 9, 5, 1048576, 9, 4, 1048576, 9, 3, 1048576, 9, 2, 1048576, 9, 65533, 1048576, 9, 65532, 1048576, 10, 65533, 1441792, 10, 65532, 1441792, 10, 65531, 1441795, 9, 65531, 655363, 11, 65531, 655360, 8, 65531, 655360, 12, 65531, 655360, 13, 65531, 655360, 14, 65531, 655363, 14, 65532, 655361, 15, 65532, 655360, 8, 65530, 0, 9, 65530, 0, 10, 65530, 0, 11, 65530, 0, 12, 65530, 0, 13, 65530, 0, 14, 65530, 0, 15, 65530, 1, 16, 65531, 0, 15, 65531, 3, 16, 65532, 655360, 17, 65532, 655360, 18, 65532, 655360, 19, 65532, 655363, 19, 65533, 1048576, 19, 65534, 1048576, 19, 65535, 1048576, 19, 0, 1048576, 20, 0, 1441792, 20, 65535, 1441792, 20, 65534, 1441792, 20, 65533, 1441792, 20, 65532, 1441792, 20, 65531, 1, 19, 65531, 0, 18, 65531, 0, 17, 65531, 0, 10, 12, 1441792, 10, 13, 1441792, 10, 14, 1441792, 10, 15, 1441792, 10, 16, 1441792, 10, 17, 1441792, 10, 18, 1441792, 10, 19, 1441792, 10, 20, 1441792, 10, 21, 1441792, 10, 22, 1441792, 10, 23, 1441792, 10, 24, 1441792, 10, 25, 1441792, 9, 12, 1048576, 9, 13, 1048576, 9, 14, 1048576, 9, 15, 1048576, 9, 16, 1048576, 9, 17, 1048576, 9, 18, 1048576, 9, 19, 1048576, 9, 20, 1048576, 9, 21, 1048576, 9, 22, 1048576, 9, 23, 1048576, 9, 24, 1048576, 9, 25, 1048576, 10, 26, 1441792, 10, 27, 1441792, 10, 28, 1441792, 10, 29, 1441792, 10, 30, 1441792, 10, 31, 1441792, 10, 32, 1441792, 10, 33, 1441792, 10, 34, 1441792, 10, 35, 1441792, 10, 36, 1441792, 10, 37, 1441792, 10, 38, 1441792, 10, 39, 1441792, 9, 26, 1048576, 9, 27, 1048576, 9, 28, 1048576, 9, 29, 1048576, 9, 30, 1048576, 9, 31, 1048576, 9, 32, 1048576, 9, 33, 1048576, 9, 34, 1048576, 9, 35, 1048576, 9, 36, 1048576, 9, 37, 1048576, 9, 38, 1048576, 9, 39, 1048576, 10, 40, 1441793, 9, 40, 655361, 15, 65535, 0, 16, 65535, 1048579, 20, 1, 1441793, 19, 1, 655361, 20, 3, 1, 19, 3, 1048577, 18, 4, 1048577, 17, 5, 1048577, 17, 6, 655361, 18, 7, 655361, 19, 8, 655361, 20, 8, 1441793, 21, 7, 1441793, 22, 6, 1441793, 22, 5, 1, 21, 4, 1, 18, 6, 655363, 19, 7, 655363, 20, 7, 1441795, 21, 6, 1441795, 21, 5, 3, 20, 4, 3, 19, 4, 1048579, 18, 5, 1048579, 19, 6, 1048578, 19, 5, 1048578, 20, 5, 1048578, 20, 6, 1048578, 65533, 65535, 1048577)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="TeleportTrigger" type="Area3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, 16)
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/TeleportTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.5005)
+shape = SubResource("BoxShape3D_3p4pa")
+
+[node name="InivisibleDoor" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.0026, 1.48584, 3.0449)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.72507, 2.52332, 0.001)
+script = ExtResource("3_y4y2w")
+metadata/Teleport_To = Vector3(30, 1, 5.5)
+
+[node name="InivisibleDoor2" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.0026, 1.48584, 4.42021)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.72507, 2.52332, 0.001)
+script = ExtResource("3_y4y2w")
+metadata/Teleport_To = Vector3(30, 1, 2.5)
+
+[node name="Objects" type="Node" parent="Environment"]
+
+[node name="Key" parent="Environment/Objects" instance=ExtResource("4_ysvp7")]
+transform = Transform3D(0.938944, -0.344069, 0, 0.344069, 0.938944, 0, 0, 0, 1, -4.26697, 1.19863, 0.832165)
+collision_layer = 2
+
+[node name="MonsterTrigger" type="Area3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9959, 0, 0)
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/MonsterTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74756, 0)
+shape = SubResource("BoxShape3D_x5yta")
+
+[node name="Cupboard" parent="." instance=ExtResource("4_kyna3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.24333, 0, 0.988514)
+
+[node name="Monster" parent="." instance=ExtResource("6_f1s55")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 0)
+
+[connection signal="body_entered" from="Environment/TeleportTrigger" to="Player" method="_on_teleport_trigger_body_entered"]
+[connection signal="body_entered" from="Environment/MonsterTrigger" to="Monster" method="_on_monster_trigger_body_entered"]

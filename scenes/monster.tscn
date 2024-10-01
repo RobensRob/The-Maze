@@ -15,3 +15,6 @@ shape = SubResource("CapsuleShape3D_um458")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 material = SubResource("StandardMaterial3D_7gn0y")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true

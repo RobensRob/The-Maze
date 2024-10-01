@@ -5,12 +5,13 @@ enum ACTION_MODE {wandering, hunting, hiding, crying}
 @export var gridmap : GridMap
 @export var navigation : NavigationRegion3D
 
+@onready var navigation_agent_3d = $NavigationAgent3D
+
 var triggered = false
 var current_mode = ACTION_MODE.wandering
 
 const WANDERING_SPEED = 1
 const SPEED = 5.0
-
 
 func _physics_process(delta):
 	if triggered:
@@ -25,11 +26,14 @@ func _physics_process(delta):
 	move_and_slide()
 
 func action_wandering():
-	var destination_position = Vector3(0, 1, 0)
-	var path = (destination_position - position).normalized() * WANDERING_SPEED
-	velocity = path
-	if position == destination_position:
-		print("lol")
+	var destination_position = Vector3(17, 1, 2)
+	navigation_agent_3d.set_target_position(destination_position)
+	
+	var destination = navigation_agent_3d.get_next_path_position()
+	var local_destination = destination - global_position
+	var direction = local_destination.normalized()
+	
+	velocity = direction * 5.0
 
 func action_hiding():
 	position = Vector3(0, 20, 0)
@@ -37,20 +41,6 @@ func action_hiding():
 func trigger_monster():
 	triggered = true
 	# TODO: Play Sound and visual effects
-
-func choose_random_target():
-	var walkable_positions = get_walkable_positions_from_gridmap()
-
-func get_walkable_positions_from_gridmap() -> Array:
-	var positions = []
-	var grid_size = gridmap.cell_size
-	for x in range(gridmap.get_used_cells().size().x):
-		for z in range(gridmap.get_used_cells().size().z):
-			var cell = Vector3(x, 1, z)
-			if gridmap.get_cell_item(cell) == -1:
-				var world_position = gridmap.map_to_local(cell) + gridmap.cell_size / 2
-				positions.append(world_position)
-	return positions
 	
 func _on_monster_trigger_body_entered(body):
 	trigger_monster()
