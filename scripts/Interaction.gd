@@ -25,5 +25,5 @@ func set_interaction_text(text):
 		label.set_text("")
 		label.set_visible(false)
 	else:
-		label.set_text("Press E to %s" % text)
+		label.set_text(text)
 		label.set_visible(true)

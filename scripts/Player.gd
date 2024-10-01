@@ -8,6 +8,8 @@ const STAMINA_SPEED = 30
 var stamina : float = 100.0
 var sprinting = false
 
+var keys = []
+
 @onready var camera = $Camera3D
 @onready var stamina_bar = $Control/StaminaBar
 
@@ -56,6 +58,14 @@ func _process(delta):
 	stamina = clamp(stamina, 0, 100)
 	stamina_bar.value = stamina
 
-
 func _on_teleport_trigger_body_entered(body):
 	position.z -= 10.5
+
+func add_key_to_inventory(element):
+	keys.append(element)
+
+func get_key_from_inventory_by_name(name):
+	for key in keys:
+		if key == name:
+			return key
+	return null

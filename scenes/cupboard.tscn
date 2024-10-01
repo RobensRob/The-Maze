@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://m7vkqgk44c5a"]
+
+[ext_resource type="PackedScene" uid="uid://bvr5hsda7anyn" path="res://resources/cupboard.glb" id="1_4v26m"]
+
+[node name="Cupboard" type="Node3D"]
+
+[node name="cupboard" parent="." instance=ExtResource("1_4v26m")]
